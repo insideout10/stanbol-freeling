@@ -1,0 +1,78 @@
+package org.apache.stanbol.enhancer.nlp.freeling.impl;
+
+import java.util.Map;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Future;
+
+import org.apache.stanbol.enhancer.nlp.freeling.pool.ResourcePool.ResourceFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import edu.upc.freeling.Util;
+
+public class LangIdFactory implements ResourceFactory<LanguageIdentifierImpl> {
+
+    protected final Logger log = LoggerFactory.getLogger(LangIdFactory.class);
+    private final ExecutorService executorService;
+    private final String configFile;
+    
+    public LangIdFactory(final String freelingLibPath, String configFile, 
+            String locale, ExecutorService factoryThreadPool){
+        if(freelingLibPath == null){
+            throw new IllegalArgumentException("The path to the Freeling native "
+                + "lib MUST NOT be NULL!");
+        }
+        if(configFile == null){
+            throw new IllegalArgumentException("The parsed configuration file for the"
+                + "Freeling Lanugge Identification component MUST NOT be NULL!");
+        }
+        if(locale == null){
+            throw new IllegalArgumentException("The parsed Freeling Locale"
+                + "MUST NOT be NULL!");
+        }
+        if(factoryThreadPool == null){
+            throw new IllegalArgumentException("The parsed ExecutorService"
+                + "MUST NOT be NULL!");
+        }
+        this.executorService = factoryThreadPool;
+        this.configFile = configFile;
+        //check for the native freeling lib
+        NativeLibsUtil.ensureNativeLib(freelingLibPath);
+        log.info("Setting locale [{}].", locale);
+        Util.initLocale(locale);
+    }
+    
+    @Override
+    public Future<LanguageIdentifierImpl> createResource(Map<String,Object> context) {
+        log.info("Request to create Language Identification Resource");
+        final long request = System.currentTimeMillis();
+        return executorService.submit(new Callable<LanguageIdentifierImpl>() {
+
+            @Override
+            public LanguageIdentifierImpl call() throws Exception {
+                long start = System.currentTimeMillis();
+                log.info("createing Language Identification Resourc ({}ms after request)",start-request);
+                try {
+                    return new LanguageIdentifierImpl(configFile);
+                } finally {
+                    long created = System.currentTimeMillis();
+                    log.info("  ... create in {}ms ({}ms after request)",created-start,created-request);
+                }
+            }
+            
+        });
+    }
+    
+    @Override
+    public void closeResource(final Object resource, Map<String,Object> context) {
+        executorService.execute(new Runnable() {
+            @Override
+            public void run() {
+                LanguageIdentifierImpl langIdent = LanguageIdentifierImpl.class.cast(resource);
+                log.info("close Language Identification resource");
+                langIdent.close();
+            }
+        });
+    }
+}
