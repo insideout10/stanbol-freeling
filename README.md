@@ -108,7 +108,7 @@ Create the following folders:
 
 In the *etc* folder, create a *symbolic link* to `/usr/local/share/freeling` (or where the share/freeling folder is located, e.g. `/usr/local/Cellar/freeling/3.0/share/freeling` on a Mac OS X install using *brew*). In the following this folder is referenced by `$FREELINGSHARE`
 
-Please note that this project also provides a default configuration for Freeling. Users that want to give it a try can replace the `$FREELINGSHARE/config`folder with the default configuration provided by [freeling-config/config](stanbol-freeling/freeling-config/config).
+Please note that this project also provides a default configuration for Freeling. Users that want to give it a try can replace the `$FREELINGSHARE/config`folder with the default configuration provided by [freeling-config/config](stanbol-freeling/tree/master/freeling-config/config).
 
 
 License:
