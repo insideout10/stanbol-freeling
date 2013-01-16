@@ -21,7 +21,7 @@
     <relativePath>..</relativePath>
 	</parent>
 
-	<artifactId>org.apache.stanbol.enhancer.nlp.freeling.core</artifactId>
+	<artifactId>io.insideout.stanbol.enhancer.nlp.freeling.core</artifactId>
 	<packaging>jar</packaging>
 
 	<name>InsideOut10 for Apache Stanbol : Freeling Stanbol NLP processing integration</name>

@@ -14,8 +14,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.apache.stanbol.enhancer.nlp.freeling;
+package io.insideout.stanbol.enhancer.nlp.freeling;
 
+
+import io.insideout.stanbol.enhancer.nlp.freeling.impl.AnalyzerFactory;
+import io.insideout.stanbol.enhancer.nlp.freeling.impl.LangIdFactory;
+import io.insideout.stanbol.enhancer.nlp.freeling.pool.ResourcePool;
+import io.insideout.stanbol.enhancer.nlp.freeling.pool.ResourcePool.ResourceFactory;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -38,10 +43,6 @@ import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.io.filefilter.SuffixFileFilter;
 import org.apache.commons.lang.StringUtils;
-import org.apache.stanbol.enhancer.nlp.freeling.impl.AnalyzerFactory;
-import org.apache.stanbol.enhancer.nlp.freeling.impl.LangIdFactory;
-import org.apache.stanbol.enhancer.nlp.freeling.pool.ResourcePool;
-import org.apache.stanbol.enhancer.nlp.freeling.pool.ResourcePool.ResourceFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

@@ -14,12 +14,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.apache.stanbol.enhancer.nlp.freeling.impl;
+package io.insideout.stanbol.enhancer.nlp.freeling.impl;
 
 import static org.apache.stanbol.enhancer.nlp.NlpAnnotations.MORPHO_ANNOTATION;
 import static org.apache.stanbol.enhancer.nlp.NlpAnnotations.NER_ANNOTATION;
 import static org.apache.stanbol.enhancer.nlp.NlpAnnotations.PHRASE_ANNOTATION;
 import static org.apache.stanbol.enhancer.nlp.NlpAnnotations.POS_ANNOTATION;
+
+import io.insideout.stanbol.enhancer.nlp.freeling.Analyzer;
+import io.insideout.stanbol.enhancer.nlp.freeling.mappings.TagMapper;
+import io.insideout.stanbol.enhancer.nlp.freeling.mappings.TagSetRegistry;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -31,9 +35,6 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import org.apache.stanbol.enhancer.nlp.NlpAnnotations;
-import org.apache.stanbol.enhancer.nlp.freeling.Analyzer;
-import org.apache.stanbol.enhancer.nlp.freeling.mappings.TagMapper;
-import org.apache.stanbol.enhancer.nlp.freeling.mappings.TagSetRegistry;
 import org.apache.stanbol.enhancer.nlp.model.AnalysedText;
 import org.apache.stanbol.enhancer.nlp.model.AnalysedTextFactory;
 import org.apache.stanbol.enhancer.nlp.model.Chunk;

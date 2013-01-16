@@ -14,11 +14,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.apache.stanbol.enhancer.nlp.freeling;
+package io.insideout.stanbol.enhancer.nlp.freeling;
 
 import static org.apache.stanbol.enhancer.nlp.NlpAnnotations.NER_ANNOTATION;
 import static org.apache.stanbol.enhancer.nlp.NlpAnnotations.PHRASE_ANNOTATION;
 import static org.apache.stanbol.enhancer.nlp.NlpAnnotations.POS_ANNOTATION;
+
+import io.insideout.stanbol.enhancer.nlp.freeling.Analyzer;
+import io.insideout.stanbol.enhancer.nlp.freeling.Freeling;
+import io.insideout.stanbol.enhancer.nlp.freeling.LanguageIdentifier;
+import io.insideout.stanbol.enhancer.nlp.freeling.LanguageIdentifier.Language;
+import io.insideout.stanbol.enhancer.nlp.freeling.pool.PoolTimeoutException;
+import io.insideout.stanbol.enhancer.nlp.freeling.pool.ResourcePool;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -28,11 +35,6 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.apache.commons.io.IOUtils;
-import org.apache.stanbol.enhancer.nlp.freeling.Analyzer;
-import org.apache.stanbol.enhancer.nlp.freeling.Freeling;
-import org.apache.stanbol.enhancer.nlp.freeling.LanguageIdentifier.Language;
-import org.apache.stanbol.enhancer.nlp.freeling.pool.PoolTimeoutException;
-import org.apache.stanbol.enhancer.nlp.freeling.pool.ResourcePool;
 import org.apache.stanbol.enhancer.nlp.model.AnalysedText;
 import org.apache.stanbol.enhancer.nlp.model.AnalysedTextUtils;
 import org.apache.stanbol.enhancer.nlp.model.Chunk;

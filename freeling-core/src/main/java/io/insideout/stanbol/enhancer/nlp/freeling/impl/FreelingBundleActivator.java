@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.apache.stanbol.enhancer.nlp.freeling.impl;
+package io.insideout.stanbol.enhancer.nlp.freeling.impl;
 
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;

@@ -14,7 +14,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.apache.stanbol.enhancer.nlp.freeling.impl;
+package io.insideout.stanbol.enhancer.nlp.freeling.impl;
+
+import io.insideout.stanbol.enhancer.nlp.freeling.Analyzer;
+import io.insideout.stanbol.enhancer.nlp.freeling.pool.ResourcePool.ResourceFactory;
 
 import java.io.File;
 import java.lang.reflect.Field;
@@ -30,8 +33,6 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
 import org.apache.felix.scr.annotations.Reference;
-import org.apache.stanbol.enhancer.nlp.freeling.Analyzer;
-import org.apache.stanbol.enhancer.nlp.freeling.pool.ResourcePool.ResourceFactory;
 import org.apache.stanbol.enhancer.nlp.model.AnalysedText;
 import org.apache.stanbol.enhancer.nlp.model.AnalysedTextFactory;
 import org.apache.stanbol.enhancer.servicesapi.ContentItemFactory;

@@ -14,14 +14,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.apache.stanbol.enhancer.nlp.freeling.impl;
+package io.insideout.stanbol.enhancer.nlp.freeling.impl;
+
+import io.insideout.stanbol.enhancer.nlp.freeling.LanguageIdentifier;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-import org.apache.stanbol.enhancer.nlp.freeling.LanguageIdentifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
