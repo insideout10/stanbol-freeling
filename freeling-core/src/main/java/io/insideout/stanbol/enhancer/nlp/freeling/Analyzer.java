@@ -21,6 +21,7 @@ import java.io.InputStream;
 import java.nio.charset.Charset;
 
 import org.apache.stanbol.enhancer.nlp.model.AnalysedText;
+import org.apache.stanbol.enhancer.servicesapi.Blob;
 
 /**
  * Interface used to analyse text using Freeling.
@@ -38,5 +39,16 @@ public interface Analyzer {
      * @throws IOException on any error while reading from the stream.
      */
     AnalysedText analyse(InputStream in,  Charset charset) throws IOException;
+    /**
+     * Analysis the content provided by the parsed {@link Blob} 
+     * and returns the analysis results as {@link AnalysedText}.
+     * @param blob the {@link Blob}
+     * @return the AnalyzedText
+     * @throws IOException on any error while reading from the stream.
+     * @throws IllegalArgumentException if the {@link Blob#getMimeType()} is
+     * not of "<code>text/**</code>" type
+     * @throws NullPointerException if the parsed {@link Blob} is <code>null</code>
+     */
+    AnalysedText analyse(Blob blob) throws IOException;
     
 }

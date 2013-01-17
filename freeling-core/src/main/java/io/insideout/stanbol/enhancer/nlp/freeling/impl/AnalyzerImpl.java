@@ -301,8 +301,17 @@ public class AnalyzerImpl implements Analyzer{
 
     public AnalysedText analyse(InputStream in,  Charset charset) throws IOException {
         //init the AnalysedText
-        Blob blob = cif.createBlob(new StreamSource(in, "text/plain; charset="
-            + (charset == null ? UTF8 : charset).name()));
+        return analyse(cif.createBlob(new StreamSource(in, "text/plain; charset="
+            + (charset == null ? UTF8 : charset).name())));
+    }
+    public AnalysedText analyse(Blob blob) throws IOException {
+        if(blob == null){
+            throw new NullPointerException("The parsed Blob MUST NOT be NULL!");
+        }
+        if(!blob.getMimeType().startsWith("text/")){
+            throw new IllegalArgumentException("The MediaType of the parsed Blob "
+                + " MUST be a text type (start with 'text/')!");
+        }
         AnalysedText at = atf.createAnalysedText(blob);
         //perform the freeling analysis
         //1. tokenize
