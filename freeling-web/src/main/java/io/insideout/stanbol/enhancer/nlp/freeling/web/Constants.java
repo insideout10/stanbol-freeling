@@ -1,4 +1,6 @@
-package io.insideout.stanbol.enhancer.nlp.freeling;
+package io.insideout.stanbol.enhancer.nlp.freeling.web;
+
+import io.insideout.stanbol.enhancer.nlp.freeling.Freeling;
 
 import org.apache.stanbol.enhancer.servicesapi.ContentItemFactory;
 

@@ -465,6 +465,7 @@ public class TagSetRegistry {
         FREELING_RU.addTag(new PosTag("QN", Pos.Participle,Pos.Infinitive));
         FREELING_RU.addTag(new PosTag("QD", Pos.Participle,Pos.IndicativeVerb));
         FREELING_RU.addTag(new PosTag("QM", Pos.Participle,Pos.ImperativeVerb));
+        FREELING_RU.addTag(new PosTag("QC", Pos.Participle)); //TODO: lookup docu
         
         FREELING_RU.addTag(new PosTag("X")); //unknown
         //PAROLE.addTag(new PosTag("Y", Pos.Abbreviation)); //abbreviation

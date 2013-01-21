@@ -1,7 +1,7 @@
-package io.insideout.stanbol.enhancer.nlp.freeling.writer;
+package io.insideout.stanbol.enhancer.nlp.freeling.web.writer;
 
 import io.insideout.stanbol.enhancer.nlp.freeling.LanguageIdentifier.Language;
-import io.insideout.stanbol.enhancer.nlp.freeling.util.Utils;
+import io.insideout.stanbol.enhancer.nlp.freeling.web.util.Utils;
 
 import java.io.IOException;
 import java.io.OutputStream;

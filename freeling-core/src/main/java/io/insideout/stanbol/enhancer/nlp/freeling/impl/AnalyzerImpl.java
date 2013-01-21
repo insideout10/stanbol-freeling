@@ -320,20 +320,20 @@ public class AnalyzerImpl implements Analyzer{
         final ListWord listWord = tokenizer.tokenize(at.getSpan());
 
         long timeStamp = System.currentTimeMillis();
-        log.debug("Tokenized {} words ({}ms)",listWord.size(),timeStamp-stepStart);
+        log.info("Tokenized {} words ({}ms)",listWord.size(),timeStamp-stepStart);
         stepStart = timeStamp;
         //2. sentence detection
         final ListSentence listSentence = splitter.split(
             listWord, alwaysFlush);
         timeStamp = System.currentTimeMillis();
-        log.debug("Splitted {} sentences ({}ms)", listSentence.size(),timeStamp-stepStart);
+        log.info("Splitted {} sentences ({}ms)", listSentence.size(),timeStamp-stepStart);
         stepStart = timeStamp;
         //3. morphological analysis
         Maco maco = getMaco();
         if(maco != null){
             maco.analyze(listSentence);
             timeStamp = System.currentTimeMillis();
-            log.debug(" ... Maco ({}ms)",timeStamp-stepStart);
+            log.info(" ... Maco ({}ms)",timeStamp-stepStart);
             stepStart = timeStamp;
         }
         //4. Part-of-Speech (POS) Tagging.
@@ -341,7 +341,7 @@ public class AnalyzerImpl implements Analyzer{
         if(hmmTagger != null){
             hmmTagger.analyze(listSentence);
             timeStamp = System.currentTimeMillis();
-            log.debug(" ... HmmTagger ({}ms)",timeStamp-stepStart);
+            log.info(" ... HmmTagger ({}ms)",timeStamp-stepStart);
             stepStart = timeStamp;
         }
         //5. Named Entity (NE) Classificiation.
@@ -349,7 +349,7 @@ public class AnalyzerImpl implements Analyzer{
         if(nec != null){
             nec.analyze(listSentence);
             timeStamp = System.currentTimeMillis();
-            log.debug(" ... NEC ({}ms)",timeStamp-stepStart);
+            log.info(" ... NEC ({}ms)",timeStamp-stepStart);
             stepStart = timeStamp;
         }
         //6. Word Sense Disambiguation
@@ -357,7 +357,7 @@ public class AnalyzerImpl implements Analyzer{
         if(ukbWrap != null){
             ukbWrap.analyze(listSentence);
             timeStamp = System.currentTimeMillis();
-            log.debug(" ... UkbWra ({}ms)",timeStamp-stepStart);
+            log.info(" ... UkbWra ({}ms)",timeStamp-stepStart);
             stepStart = timeStamp;
         }
         //7. Sense Labelling
@@ -365,7 +365,7 @@ public class AnalyzerImpl implements Analyzer{
         if(senses != null){
             senses.analyze(listSentence);
             timeStamp = System.currentTimeMillis();
-            log.debug(" ... Senses ({}ms)",timeStamp-stepStart);
+            log.info(" ... Senses ({}ms)",timeStamp-stepStart);
             stepStart = timeStamp;
         }
         //8. Chunk parser
@@ -373,7 +373,7 @@ public class AnalyzerImpl implements Analyzer{
         if(chartParser != null) {
             chartParser.analyze(listSentence);
             timeStamp = System.currentTimeMillis();
-            log.debug(" ... ChartParser ({}ms)",timeStamp-stepStart);
+            log.info(" ... ChartParser ({}ms)",timeStamp-stepStart);
             stepStart = timeStamp;
         }
         //9. Dependency parser
@@ -381,7 +381,7 @@ public class AnalyzerImpl implements Analyzer{
         if(depTxala != null) {
             depTxala.analyze(listSentence);
             timeStamp = System.currentTimeMillis();
-            log.debug(" ... DepTxala ({}ms)",timeStamp-stepStart);
+            log.info(" ... DepTxala ({}ms)",timeStamp-stepStart);
             stepStart = timeStamp;
         }
         timeStamp = System.currentTimeMillis();

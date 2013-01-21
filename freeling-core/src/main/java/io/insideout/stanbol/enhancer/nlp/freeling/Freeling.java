@@ -194,7 +194,6 @@ public class Freeling {
                + "language configuration (*.{}) files!",configDir,
                configurationFilenameSuffix);
        } else {
-           
            AnalyzerFactory analyzerFactory = new AnalyzerFactory(
                freelingLibPath, freelingSharePath, locale, 
                freelingInitThreadPool);

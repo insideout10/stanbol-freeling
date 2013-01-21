@@ -34,39 +34,6 @@
 
 	<build>
 		<plugins>
-			<!-- NOT a Bundle!! plugin>
-				<groupId>org.apache.felix</groupId>
-				<artifactId>maven-bundle-plugin</artifactId>
-				<extensions>true</extensions>
-				<configuration>
-					<instructions>
-						<Bundle-Activator>
-							io.insideout.wordlift.org.apache.stanbol.enhancer.engines.freeling.impl.FreelingBundleActivator
-						</Bundle-Activator>
-						<Export-Package>
-							io.insideout.wordlift.org.apache.stanbol.enhancer.engines.freeling;version=${project.version},
-							io.insideout.wordlift.org.apache.stanbol.enhancer.engines.freeling.*;version=${project.version}
-						</Export-Package>
-						<Import-Package>
-							io.insideout.wordlift.org.apache.stanbol.domain;version=${project.version},
-							io.insideout.wordlift.org.apache.stanbol.services;version=${project.version},
-							io.insideout.wordlift.org.apache.stanbol.enhancer.engines.freeling;version=${project.version},
-							*
-						</Import-Package>
-						<Private-Package>
-							edu.upc.freeling
-						</Private-Package>
-						<Bundle-NativeCode>
-							lib/libfreeling_javaAPI.jnilib;osname=MacOSX;processor=x86;processor=x86-64,
-							lib/libfreeling_javaAPI.so;osname=Linux;processor=x86;processor=x86-64
-						</Bundle-NativeCode>
-					</instructions>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.felix</groupId>
-				<artifactId>maven-scr-plugin</artifactId>
-			</plugin -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>

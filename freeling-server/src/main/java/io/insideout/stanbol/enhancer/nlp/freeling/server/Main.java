@@ -1,8 +1,8 @@
 package io.insideout.stanbol.enhancer.nlp.freeling.server;
 
-import io.insideout.stanbol.enhancer.nlp.freeling.Constants;
 import io.insideout.stanbol.enhancer.nlp.freeling.Freeling;
-import io.insideout.stanbol.enhancer.nlp.freeling.FreelingApplication;
+import io.insideout.stanbol.enhancer.nlp.freeling.web.Constants;
+import io.insideout.stanbol.enhancer.nlp.freeling.web.FreelingApplication;
 
 import java.io.File;
 import java.util.Iterator;

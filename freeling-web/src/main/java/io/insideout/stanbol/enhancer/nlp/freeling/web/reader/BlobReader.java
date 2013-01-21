@@ -1,8 +1,8 @@
-package io.insideout.stanbol.enhancer.nlp.freeling.reader;
+package io.insideout.stanbol.enhancer.nlp.freeling.web.reader;
 
-import static io.insideout.stanbol.enhancer.nlp.freeling.Constants.SERVLET_ATTRIBUTE_CONTENT_ITEM_FACTORY;
-import io.insideout.stanbol.enhancer.nlp.freeling.Constants;
-import io.insideout.stanbol.enhancer.nlp.freeling.util.Utils;
+import static io.insideout.stanbol.enhancer.nlp.freeling.web.Constants.SERVLET_ATTRIBUTE_CONTENT_ITEM_FACTORY;
+import io.insideout.stanbol.enhancer.nlp.freeling.web.Constants;
+import io.insideout.stanbol.enhancer.nlp.freeling.web.util.Utils;
 
 import java.io.IOException;
 import java.io.InputStream;

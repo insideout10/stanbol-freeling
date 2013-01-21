@@ -1,8 +1,8 @@
 package io.insideout.stanbol.enhancer.nlp.freeling.web.resource;
 
-import static io.insideout.stanbol.enhancer.nlp.freeling.Constants.DEFAULT_RESOURCE_WAIT_TIME;
-import static io.insideout.stanbol.enhancer.nlp.freeling.Constants.SERVLET_ATTRIBUTE_FREELING;
-import static io.insideout.stanbol.enhancer.nlp.freeling.Constants.SERVLET_ATTRIBUTE_MAX_RESOURCE_WAIT_TIEM;
+import static io.insideout.stanbol.enhancer.nlp.freeling.web.Constants.DEFAULT_RESOURCE_WAIT_TIME;
+import static io.insideout.stanbol.enhancer.nlp.freeling.web.Constants.SERVLET_ATTRIBUTE_FREELING;
+import static io.insideout.stanbol.enhancer.nlp.freeling.web.Constants.SERVLET_ATTRIBUTE_MAX_RESOURCE_WAIT_TIEM;
 import static javax.ws.rs.core.HttpHeaders.CONTENT_LANGUAGE;
 import static javax.ws.rs.core.Response.Status.BAD_REQUEST;
 import static javax.ws.rs.core.Response.Status.SERVICE_UNAVAILABLE;
@@ -12,7 +12,7 @@ import io.insideout.stanbol.enhancer.nlp.freeling.LanguageIdentifier;
 import io.insideout.stanbol.enhancer.nlp.freeling.LanguageIdentifier.Language;
 import io.insideout.stanbol.enhancer.nlp.freeling.pool.PoolTimeoutException;
 import io.insideout.stanbol.enhancer.nlp.freeling.pool.ResourcePool;
-import io.insideout.stanbol.enhancer.nlp.freeling.util.Utils;
+import io.insideout.stanbol.enhancer.nlp.freeling.web.util.Utils;
 
 import java.io.IOException;
 import java.nio.charset.Charset;

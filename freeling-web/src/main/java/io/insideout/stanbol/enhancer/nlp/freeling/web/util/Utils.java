@@ -1,6 +1,6 @@
-package io.insideout.stanbol.enhancer.nlp.freeling.util;
+package io.insideout.stanbol.enhancer.nlp.freeling.web.util;
 
-import static io.insideout.stanbol.enhancer.nlp.freeling.Constants.SERVLET_ATTRIBUTE_FREELING;
+import static io.insideout.stanbol.enhancer.nlp.freeling.web.Constants.SERVLET_ATTRIBUTE_FREELING;
 
 import java.lang.reflect.GenericArrayType;
 import java.lang.reflect.ParameterizedType;

@@ -1,9 +1,9 @@
-package io.insideout.stanbol.enhancer.nlp.freeling;
+package io.insideout.stanbol.enhancer.nlp.freeling.web;
 
-import io.insideout.stanbol.enhancer.nlp.freeling.reader.BlobReader;
+import io.insideout.stanbol.enhancer.nlp.freeling.web.reader.BlobReader;
 import io.insideout.stanbol.enhancer.nlp.freeling.web.resource.AnalysisResource;
 import io.insideout.stanbol.enhancer.nlp.freeling.web.resource.LangIdentResource;
-import io.insideout.stanbol.enhancer.nlp.freeling.writer.DetectedLanguageWriter;
+import io.insideout.stanbol.enhancer.nlp.freeling.web.writer.DetectedLanguageWriter;
 
 import java.util.Arrays;
 import java.util.HashSet;
