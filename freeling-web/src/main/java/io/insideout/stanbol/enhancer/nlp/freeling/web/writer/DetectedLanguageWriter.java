@@ -14,14 +14,16 @@ import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.MultivaluedMap;
 import javax.ws.rs.ext.MessageBodyWriter;
+import javax.ws.rs.ext.Provider;
 
 import org.codehaus.jackson.JsonFactory;
 import org.codehaus.jackson.JsonGenerator;
 
+@Provider
 @Produces(MediaType.APPLICATION_JSON)
 public class DetectedLanguageWriter implements MessageBodyWriter<Collection<Language>>{
 
-    JsonFactory jsonFactory;
+    private JsonFactory jsonFactory;
     
     @Override
     public boolean isWriteable(Class<?> type, Type genericType, Annotation[] annotations, MediaType mediaType) {
@@ -40,18 +42,16 @@ public class DetectedLanguageWriter implements MessageBodyWriter<Collection<Lang
             MediaType mediaType, MultivaluedMap<String,Object> httpHeaders, OutputStream entityStream)
             throws IOException, WebApplicationException {
         JsonGenerator jg = getJsonFactory().createJsonGenerator(entityStream);
-        jg.writeStartObject();
-        jg.writeArrayFieldStart("detected");
+        jg.writeStartArray();
         for(Language lang : detected){
             jg.writeStartObject();
-            jg.writeStringField("language", lang.getLang());
+            jg.writeStringField("lang", lang.getLang());
             if(lang.getProb() > 0){
-                jg.writeNumberField("probability", lang.getProb());
+                jg.writeNumberField("prob", lang.getProb());
             }
             jg.writeEndObject();
         }
         jg.writeEndArray();
-        jg.writeEndObject();
         jg.close();
     }
     
