@@ -1,0 +1,89 @@
+<html>
+  <head>
+
+    <title>Apache Stanbol Freeling Integration Server</title>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+
+    <!-- to be moved in the dedicated fragment -->
+    <link rel="stylesheet" href="/static/home/style/stanbol.css" />
+    <link rel="icon" type="image/png" href="/static/home/images/favicon.png" />
+
+    <link rel="stylesheet" href="/static/stanbol.css" />
+
+  </head>
+
+  <body>
+    <div class="home"><a href="/"><img src="/static/apache_stanbol_logo_cropped.png" alt="Stanbol Home" /></a></div>
+    <div class="header">
+      <h1>Apache Stanbol Freeling Integration Server</h1>
+
+      <div class="mainNavigationMenu">
+      <ul>
+        <li class="unselected"><a href="/analysis">/analysis</a></li>
+        <li class="unselected"><a href="/langident">/langident</a></li>
+      </ul>
+      </div>
+      <div style="clear: both"></div>
+    </div>
+
+    <div class="content">
+      <h2>Language Identification Service</h2>
+      <div style="clear: both"></div>
+
+<p>This stateless interface allows the caller to identify the language for 
+submitted content.</p>
+
+<p>This service is intended to be used in combination with the Stanbol Enhancer
+RESTful Language Identification Engine 
+(<a href="https://issues.apache.org/jira/browse/STANBOL-895">STANBOL-895</a>).
+To use this service with the RESTful Language Identification Engine just 
+configure this URI as Service URI to an Engine instance.</p>
+
+<h3>RESTful interface</h3>
+
+<p>The content to analyse should be sent in a POST request with 
+the <code>Content-type</code> header set to '<code>text/plain</code>'. 
+The response will be a JSON array containing information about the 
+identified languages as specified by 
+<a href="https://issues.apache.org/jira/browse/STANBOL-894">STANBOL-894</a></p>
+   
+<pre>
+curl -X POST -H "Content-type: text/plain" \
+     --data "The Freeling lanugage identification service can detect the \
+         language of the parsed text." http://{host}:{port}/langident
+</pre> 
+
+<p>The Response will look like</p>
+ 
+ <pre>
+ [{
+     "lang":"en",
+     "prob":0.9688454784176675
+ },{
+     "lang":"fr",
+     "prob":0.6318333375102646
+ },{
+     "lang":"es",
+     "prob":0.5973599954559282
+ }]
+ </pre>
+ 
+ 
+    </div>
+
+    <div class="footer">
+
+    <div class="column">
+      <a href="http://www.w3.org/standards/semanticweb/"><img class="swcube"
+        src="/static/sw-cube.png"/></a>
+      <a href="http://www.iks-project.eu"><img
+        height="60px" alt="IKS Project" src="/static/iks_project_logo.jpg" /></a>
+    </div>
+    <div class="column right">
+      <em>The research leading to these results has received funding from the European Community's
+          Seventh Framework Programme (FP7/2007-2013) under grant agreement n° 231527</em>
+    </div>
+    <div style="clear: both"></div>
+    </div>
+  </body>
+</html>

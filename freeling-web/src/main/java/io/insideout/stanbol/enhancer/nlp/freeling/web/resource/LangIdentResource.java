@@ -12,17 +12,17 @@ import io.insideout.stanbol.enhancer.nlp.freeling.pool.PoolTimeoutException;
 import io.insideout.stanbol.enhancer.nlp.freeling.pool.ResourcePool;
 import io.insideout.stanbol.enhancer.nlp.freeling.web.util.Utils;
 
+import java.io.InputStream;
 import java.util.Collection;
 import java.util.List;
 
 import javax.servlet.ServletContext;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
-import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Context;
-import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
@@ -33,9 +33,21 @@ public class LangIdentResource {
     private Freeling freeling;
     
     @Context
-    ServletContext servletContext;
+    private ServletContext servletContext;
 
     private Long maxWaitTime;
+
+    @GET
+    @Produces(MediaType.TEXT_HTML)
+    public Response getHomepage(){
+        InputStream in = LangIdentResource.class.getClassLoader().getResourceAsStream("langident.html");
+        if(in == null){
+            return Response.status(Status.NOT_FOUND).build();
+        } else {
+            return Response.ok(in,MediaType.TEXT_HTML_TYPE).build();
+        }
+    }
+
     
     @POST
     @Consumes(MediaType.TEXT_PLAIN)

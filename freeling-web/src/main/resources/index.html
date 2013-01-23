@@ -1,0 +1,64 @@
+<html>
+  <head>
+
+    <title>Apache Stanbol Freeling RESTful Service</title>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+
+    <!-- to be moved in the dedicated fragment -->
+    <link rel="stylesheet" href="/static/stanbol.css" />
+    <link rel="icon" type="image/png" href="/static/favicon.png" />
+
+  </head>
+
+  <body>
+    <div class="home"><a href="/"><img src="/static/apache_stanbol_logo_cropped.png" alt="Stanbol Home" /></a></div>
+    <div class="header">
+      <h1>Apache Stanbol Freeling Integration Server</h1>
+
+      <div class="mainNavigationMenu">
+      <ul>
+        <li class="unselected"><a href="/analysis">/analysis</a></li>
+        <li class="unselected"><a href="/langident">/langident</a></li>
+      </ul>
+      </div>
+      <div style="clear: both"></div>
+    </div>
+
+    <div class="content">
+      <h2>The Apache Stanbol Freeling Integration</h2>
+      <div style="clear: both"></div>
+
+<p>This Server provides in integration for<a href="http://nlp.lsi.upc.edu/freeling/">
+Freeling</a> with the Stanbol Enhancer NLP module.<br>
+TODO: more introduction
+</p>
+
+<p>This Server supports two RESTful APIs:</p>
+<dl>
+
+    <dt><a href="/langident">/langidnet</a><dt>
+    <dd>Service that supports the identification of the language for
+    parsed content</dd>
+    <dt><a href="/analysis">/analysis</a><dt>
+    <dd>Service that uses Freeling to analyze parsed texts and returns NLP
+    processing results as JSON serialized AnalysedText content part.</dd>
+
+</dl>
+    </div>
+
+    <div class="footer">
+
+    <div class="column">
+      <a href="http://www.w3.org/standards/semanticweb/"><img class="swcube"
+        src="/static/sw-cube.png"/></a>
+      <a href="http://www.iks-project.eu"><img
+        height="60px" alt="IKS Project" src="/static/iks_project_logo.jpg" /></a>
+    </div>
+    <div class="column right">
+      <em>The research leading to these results has received funding from the European Community's
+          Seventh Framework Programme (FP7/2007-2013) under grant agreement n° 231527</em>
+    </div>
+    <div style="clear: both"></div>
+    </div>
+  </body>
+</html>

@@ -3,6 +3,7 @@ package io.insideout.stanbol.enhancer.nlp.freeling.web;
 import io.insideout.stanbol.enhancer.nlp.freeling.web.reader.BlobReader;
 import io.insideout.stanbol.enhancer.nlp.freeling.web.resource.AnalysisResource;
 import io.insideout.stanbol.enhancer.nlp.freeling.web.resource.LangIdentResource;
+import io.insideout.stanbol.enhancer.nlp.freeling.web.resource.MainResource;
 import io.insideout.stanbol.enhancer.nlp.freeling.web.writer.DetectedLanguageWriter;
 
 import java.util.Arrays;
@@ -20,7 +21,8 @@ public class FreelingApplication extends Application {
     public Set<Class<?>> getClasses() {
         return new HashSet<Class<?>>(Arrays.asList(
             AnalyzedTextWriter.class, DetectedLanguageWriter.class,
-            BlobReader.class, AnalysisResource.class, LangIdentResource.class));
+            BlobReader.class, MainResource.class,
+            AnalysisResource.class, LangIdentResource.class));
     }
 
 }

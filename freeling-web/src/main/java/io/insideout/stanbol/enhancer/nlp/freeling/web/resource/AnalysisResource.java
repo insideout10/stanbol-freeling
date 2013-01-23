@@ -15,6 +15,7 @@ import io.insideout.stanbol.enhancer.nlp.freeling.pool.ResourcePool;
 import io.insideout.stanbol.enhancer.nlp.freeling.web.util.Utils;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.charset.Charset;
 import java.util.Collection;
 import java.util.List;
@@ -30,6 +31,7 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.Status;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.stanbol.enhancer.nlp.model.AnalysedText;
@@ -47,6 +49,16 @@ public class AnalysisResource {
     private Long maxWaitTime;
     private Freeling freeling;
     
+    @GET
+    @Produces(MediaType.TEXT_HTML)
+    public Response getHomepage(){
+        InputStream in = AnalysisResource.class.getClassLoader().getResourceAsStream("analysis.html");
+        if(in == null){
+            return Response.status(Status.NOT_FOUND).build();
+        } else {
+            return Response.ok(in,MediaType.TEXT_HTML_TYPE).build();
+        }
+    }
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
