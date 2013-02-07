@@ -1,0 +1,100 @@
+#!/bin/sh
+# Copyright (c) 2013 InsideOut10
+# All rights reserved.
+#
+# Author: David Riccitelli, 2013
+#
+# /etc/init.d/freeling-server
+### BEGIN INIT INFO
+# Provides:          freeling-server   
+# Required-Start:    $network
+# Required-Stop:
+# Default-Start:     3 5
+# Default-Stop:      0 1 2 6
+# Short-Description: Freeling Server
+# Description:       Freeling Server
+### END INIT INFO
+APP_NAME="Freeling Server"
+APP_HOME=/opt/freeling
+APP_LIB="$APP_HOME/lib/io.insideout.stanbol.enhancer.nlp.freeling.server-1.0-SNAPSHOT-jar-with-dependencies.jar"
+
+FREELING_SHARE="/usr/local/share/freeling"
+FREELING_CONFIG="/opt/freeling/etc/config"
+PORT=8081
+FREELING_NATIVE_LIB="$APP_HOME/lib/libfreeling_javaAPI.so"
+MAX_WAIT_TIME=30000
+MAX_POOL_SIZE=10
+MIN_QUEUE_SIZE=2
+INIT_THREADS=1
+
+APP_CMD="java \
+	  -jar $APP_LIB \
+	  --shared $FREELING_SHARE \
+	  --config $FREELING_CONFIG \
+	  --port $PORT \
+	  --native-lib $FREELING_NATIVE_LIB \
+	  --max-wait-time $MAX_WAIT_TIME \
+	  --max-pool-size $MAX_POOL_SIZE \
+	  --min-queue-size $MIN_QUEUE_SIZE \
+	  --init-threads $INIT_THREADS"
+
+PID_FILE=/var/run/freeling-server.pid
+
+test -f $APP_LIB || { echo "$APP_LIB not installed or not found.";
+	if [ "$1" = "stop" ]; then exit 0;
+	else exit 5; fi; }
+
+case "$1" in
+    start)
+        echo -n "Starting $APP_NAME ($APP_CMD) "
+
+	PID=`$APP_CMD > /dev/null 2>&1 & echo $!`
+
+	if [ -z $PID ]; then
+		printf "%s\n" "Fail"
+	else
+		echo $PID > $PID_FILE
+		printf "%s\n" "Ok"
+	fi
+
+    ;;
+    stop)
+        echo -n "Shutting down $APP_NAME "
+
+	if [ -f $PID_FILE ]; then
+		PID=`cat $PID_FILE`
+		kill -HUP $PID
+		printf "%s\n" "Ok"
+		rm -f $PID_FILE
+	else
+		printf "%s\n" "pidfile not found"
+	fi
+    ;;
+    restart)
+        ## Stop the service and regardless of whether it was
+        ## running or not, start it again.
+        $0 stop
+        $0 start
+
+        # Remember status and be quiet
+    ;;
+    status)
+        echo -n "Checking for service $APP_NAME "
+	if [ -f $PID_FILE ]; then
+		PID=`cat $PID_FILE`
+		if [ -z "`ps axf | grep ${PID} | grep -v grep`" ]; then
+			printf "%s\n" "Process dead but pidfile exists"
+		else
+			echo "Running"
+		fi
+	else
+		printf "%s\n" "Service not running"
+	fi
+    ;;
+    *)
+        ## If no parameters are given, print which are avaiable.
+        echo "Usage: $0 {start|stop|status|restart}"
+        exit 1
+        ;;
+esac
+
