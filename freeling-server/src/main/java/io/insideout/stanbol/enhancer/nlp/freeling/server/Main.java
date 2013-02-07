@@ -109,7 +109,7 @@ public class Main {
         nativeLib = line.getOptionValue('l', nativeLib);
         if(!new File(nativeLib).isFile()){
             System.err.println("The configured Freeling native lib '"
-                    + configFolder + "' is not a file!\n");
+                    + nativeLib + "' is not a file!\n");
             System.exit(1);
         }
         Freeling freeling = new Freeling(

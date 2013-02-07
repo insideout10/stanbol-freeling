@@ -80,8 +80,11 @@ public class NativeLibsUtil {
         if(!libraries.contains(nativLibPath) && !libraries.contains(libName)){
             try {
                 System.load(nativLibPath);
+                log.info(" ... loaded native lib "+nativLibPath);
             } catch (UnsatisfiedLinkError e) {
+                log.warn("Unable to load '{}' to JVM. (will retry with LoadLibrary)",e);
                 System.loadLibrary(libName);
+                log.info(" ... loaded native lib "+nativLibPath);
             }
         }
     }
