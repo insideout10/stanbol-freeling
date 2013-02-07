@@ -108,6 +108,6 @@ public class NativeLibsUtil {
                 return libName; //
             }
         }
-        return nativeLibFile.getPath();
+        return nativeLibFile.getAbsolutePath();
     }
 }
