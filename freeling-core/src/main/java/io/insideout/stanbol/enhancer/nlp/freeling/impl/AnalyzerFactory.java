@@ -255,7 +255,10 @@ public class AnalyzerFactory implements ResourceFactory<AnalyzerImpl> {
 
         AnalyzerImpl analyzer = new AnalyzerImpl(
             getContentItemFactory(),getAnalysedTextFactory(),
-            language,tokenizer, splitter, properties.isAlwaysFlush());
+            language,tokenizer, splitter, 
+            //always flush at the end of a document! Stanbol does not send
+            //parts of documents!
+            true); 
         
         log.debug("Creating the MACO analyzer.");
         analyzer.setMaco(new Maco(macoOptions));
