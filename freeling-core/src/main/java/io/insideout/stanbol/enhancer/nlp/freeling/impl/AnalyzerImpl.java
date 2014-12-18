@@ -20,7 +20,6 @@ import static org.apache.stanbol.enhancer.nlp.NlpAnnotations.MORPHO_ANNOTATION;
 import static org.apache.stanbol.enhancer.nlp.NlpAnnotations.NER_ANNOTATION;
 import static org.apache.stanbol.enhancer.nlp.NlpAnnotations.PHRASE_ANNOTATION;
 import static org.apache.stanbol.enhancer.nlp.NlpAnnotations.POS_ANNOTATION;
-
 import io.insideout.stanbol.enhancer.nlp.freeling.Analyzer;
 import io.insideout.stanbol.enhancer.nlp.freeling.mappings.TagMapper;
 import io.insideout.stanbol.enhancer.nlp.freeling.mappings.TagSetRegistry;
@@ -58,13 +57,15 @@ import edu.upc.freeling.DepTxala;
 import edu.upc.freeling.HmmTagger;
 import edu.upc.freeling.ListAnalysis;
 import edu.upc.freeling.ListSentence;
+import edu.upc.freeling.ListSentenceIterator;
 import edu.upc.freeling.ListWord;
+import edu.upc.freeling.ListWordIterator;
 import edu.upc.freeling.Maco;
 import edu.upc.freeling.Nec;
 import edu.upc.freeling.Senses;
 import edu.upc.freeling.Splitter;
 import edu.upc.freeling.Tokenizer;
-import edu.upc.freeling.UkbWrap;
+import edu.upc.freeling.Ukb;
 import edu.upc.freeling.Word;
 
 public class AnalyzerImpl implements Analyzer{
@@ -96,7 +97,7 @@ public class AnalyzerImpl implements Analyzer{
     private DepTxala depTxala;
 	private Nec nec;
 	private Senses senses;
-	private UkbWrap ukbWrap;
+	private Ukb ukbWrap;
 
 	private double minProb = DEFAULT_MIN_PROBABILITY;
 
@@ -211,7 +212,7 @@ public class AnalyzerImpl implements Analyzer{
     /**
      * @return the ukbWrap
      */
-    protected final UkbWrap getUkbWrap() {
+    protected final Ukb getUkbWrap() {
         return closed ? null : ukbWrap;
     }
 	
@@ -266,7 +267,7 @@ public class AnalyzerImpl implements Analyzer{
     /**
      * @param ukbWrap the ukbWrap to set
      */
-    final void setUkbWrap(UkbWrap ukbWrap) {
+    final void setUkbWrap(Ukb ukbWrap) {
         this.ukbWrap = ukbWrap;
     }
 
@@ -353,7 +354,7 @@ public class AnalyzerImpl implements Analyzer{
             stepStart = timeStamp;
         }
         //6. Word Sense Disambiguation
-        UkbWrap ukbWrap = getUkbWrap();
+        Ukb ukbWrap = getUkbWrap();
         if(ukbWrap != null){
             ukbWrap.analyze(listSentence);
             timeStamp = System.currentTimeMillis();
@@ -389,20 +390,27 @@ public class AnalyzerImpl implements Analyzer{
             new Object[]{listWord.size(),language,timeStamp-analysisStart});
         stepStart = timeStamp;
         //get the Data for the language
-        for(int i=0;i<listSentence.size();i++){
-            edu.upc.freeling.Sentence sent = listSentence.get(i);
-            at.addSentence((int)sent.get(0).getSpanStart(), 
-                (int)sent.get((int)sent.size()-1).getSpanFinish());
-            for (int j = 0; j < sent.size(); j++) {
-                Word word = sent.get(j);
-                long start = word.getSpanStart();
+        ListSentenceIterator sentenceIterator = new ListSentenceIterator(listSentence);
+        while(sentenceIterator.hasNext()){
+            edu.upc.freeling.Sentence sent = sentenceIterator.next();
+            long start = sent.front().getSpanStart();
+            long stop = sent.back().getSpanFinish();
+            if(start < stop)
+            	at.addSentence((int) start, (int) stop);
+            else
+            	continue;
+            ListWordIterator wordIterator = new ListWordIterator(sent);
+            while (wordIterator.hasNext()) {
+                Word word = wordIterator.next();
+                start = word.getSpanStart();
                 long end = word.getSpanFinish();
-                double prob = word.getAnalysis().size() > 0 ? word.getAnalysis().get(0).getProb() : -1;
+                double prob = word.getAnalysis().size() > 0 ? word.getAnalysis().front().getProb() : -1;
                 //Not all words are words. Some of them are chunks.
                 ListWord enclosedWords = word.getWordsMw();
                 if(enclosedWords.size() > 1){
-                    for(int k = 0; k < enclosedWords.size(); k++){
-                        Word enclosedWord = enclosedWords.get(k);
+                	ListWordIterator it = new ListWordIterator(enclosedWords);
+                    while(it.hasNext()){
+                        Word enclosedWord = it.next();
                         //add Tokens
                         Token token = at.addToken((int)enclosedWord.getSpanStart(), 
                             (int)enclosedWord.getSpanFinish());
@@ -460,8 +468,9 @@ public class AnalyzerImpl implements Analyzer{
     private void processAnalysis(Token token, ListAnalysis analysisList, boolean fromParent) {
         Map<PosTag,double[]> posMap = new LinkedHashMap<PosTag,double[]>();
         Map<MorphoFeatures,double[]> mfMap = new LinkedHashMap<MorphoFeatures,double[]>();
-        for(int a = 0;a<analysisList.size();a++){
-            Analysis analysis = analysisList.get(a);
+        int size = (int) analysisList.size();
+        for(int a = 0; a < size; a++){
+            Analysis analysis = analysisList.front();
             PosTag posTag = getPostTag(analysis.getTag());
             log.trace("   {}. POS       :: {} ", a, posTag);
             double[] prob = posMap.get(posTag);
@@ -481,6 +490,7 @@ public class AnalyzerImpl implements Analyzer{
                     }
                 }
             }
+            analysisList.popFront();
         }
         List<Value<PosTag>> posValues = new ArrayList<Value<PosTag>>(posMap.size());
         for(Entry<PosTag,double[]> posEntry : posMap.entrySet()){
