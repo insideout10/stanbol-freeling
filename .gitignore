@@ -1,2 +1,4 @@
 target/
 .DS_Store
+freeling-server/.classpath
+freeling-server/.settings/org.eclipse.core.resources.prefs

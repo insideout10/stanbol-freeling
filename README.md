@@ -13,7 +13,7 @@ http://nlp.lsi.upc.edu/freeling/index.php?option=com_content&task=view&id=25&Ite
 
 ### Install on Ubuntu 12.04
 
-Download **Freeling 3.0** from `http://devel.cpl.upc.edu/freeling/downloads/21`:
+Download **Freeling 3.X** from `http://devel.cpl.upc.edu/freeling/downloads?order=time&desc=1`:
 ```sh
 curl -o freeling-3.0.tar.gz http://devel.cpl.upc.edu/freeling/downloads/21
 ```
@@ -63,10 +63,7 @@ brew install --with-icu boost
 
 #### Install Java APIs
 
-JDK 6.0 is required.
-
-Overwrite the `freeling-HEAD/APIs/commong/freeling.i` file with the one provided here:
-`https://raw.github.com/ziodave/freeling-brew-formula/master/APIs/common/freeling.i`
+At least JDK 6.0 is required. JDK 7.x has been tested and is also valid
 
 Change to `freeling-3.0/APIs/java`.
 

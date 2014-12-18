@@ -20,16 +20,11 @@ import io.insideout.stanbol.enhancer.nlp.freeling.Analyzer;
 import io.insideout.stanbol.enhancer.nlp.freeling.pool.ResourcePool.ResourceFactory;
 
 import java.io.File;
-import java.lang.reflect.Field;
-import java.net.URISyntaxException;
-import java.net.URL;
-import java.util.Collection;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.ServiceLoader;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
 import org.apache.felix.scr.annotations.Reference;
@@ -48,7 +43,7 @@ import edu.upc.freeling.Nec;
 import edu.upc.freeling.Senses;
 import edu.upc.freeling.Splitter;
 import edu.upc.freeling.Tokenizer;
-import edu.upc.freeling.UkbWrap;
+import edu.upc.freeling.Ukb;
 import edu.upc.freeling.Util;
 
 
@@ -264,8 +259,8 @@ public class AnalyzerFactory implements ResourceFactory<AnalyzerImpl> {
         analyzer.setMaco(new Maco(macoOptions));
 
         log.debug("Creating the tagger.");
-        analyzer.setHmmTagger(new HmmTagger(properties.getLanguage(),
-                properties.getTaggerHMMFile(), properties.isTaggerRetokenize(),
+        analyzer.setHmmTagger(new HmmTagger(properties.getTaggerHMMFile(), 
+        		properties.isTaggerRetokenize(),
                 properties.getTaggerForceSelect()));
 
         ChartParser chartParser = null;
@@ -303,7 +298,7 @@ public class AnalyzerFactory implements ResourceFactory<AnalyzerImpl> {
         final File ukbConfigFile = new File(properties.getUkbConfigFile());
         if (ukbConfigFile.exists() && ukbConfigFile.isFile()) {
             log.debug("Creating the disambiguation tool.");
-            analyzer.setUkbWrap(new UkbWrap(properties.getUkbConfigFile()));
+            analyzer.setUkbWrap(new Ukb(properties.getUkbConfigFile()));
         }
         
         return analyzer;

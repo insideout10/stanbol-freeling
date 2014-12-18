@@ -79,9 +79,8 @@ public class LanguageIdentifierImpl implements LanguageIdentifier {
 
         logger.trace("Identifying language.");
 
-        SWIGTYPE_p_std__setT_std__wstring_t allowedLanguages = Util.wstring2set(languages, ",");
-
-        List<Language> languageSet = identifyMultipleLanguages(text, allowedLanguages);
+        //SWIGTYPE_p_std__setT_std__wstring_t allowedLanguages = Util.(languages, ",");
+        List<Language> languageSet = identifyMultipleLanguages(text/*, allowedLanguages*/);
 
         // return the found languages
         return languageSet;
@@ -92,12 +91,12 @@ public class LanguageIdentifierImpl implements LanguageIdentifier {
         return languageIdentifier.identifyLanguage(text, languages);
     }
 
-    private List<Language> identifyMultipleLanguages(String text, SWIGTYPE_p_std__setT_std__wstring_t languages) {
+    private List<Language> identifyMultipleLanguages(String text/*, SWIGTYPE_p_std__setT_std__wstring_t languages*/) {
         if(languageIdentifier == null){
             throw new IllegalStateException("The language identifier was already closed!");
         }
         VectorPairDoubleString languageRanks = new VectorPairDoubleString();
-        languageIdentifier.rankLanguages(languageRanks, text, languages);
+        languageIdentifier.rankLanguages(languageRanks, text/*, languages*/);
 
         int size = (int) languageRanks.size();
 
