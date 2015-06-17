@@ -20,13 +20,11 @@ package io.insideout.stanbol.enhancer.nlp.freeling;
 import io.insideout.stanbol.enhancer.nlp.freeling.impl.AnalyzerFactory;
 import io.insideout.stanbol.enhancer.nlp.freeling.impl.LangIdFactory;
 import io.insideout.stanbol.enhancer.nlp.freeling.pool.ResourcePool;
-import io.insideout.stanbol.enhancer.nlp.freeling.pool.ResourcePool.ResourceFactory;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.lang.reflect.Field;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
@@ -205,7 +203,7 @@ public class Freeling {
                context.put(AnalyzerFactory.PROPERTY_CONFIG_FILE, supported.getValue());
                log.debug(" ... create ResourcePool for {}",context);
                analyzerPools.put(supported.getKey(), new ResourcePool<Analyzer>(
-                       poolSize,minQueueSize, analyzerFactory, context));
+                       poolSize, analyzerFactory, context));
            }
        }
        if(langIdConfigFile == null){
@@ -219,7 +217,7 @@ public class Freeling {
                freelingLibPath, langIdConfigFile, locale, freelingInitThreadPool);
            //Finally init the language identifier resource pool
            langIdPool = new ResourcePool<LanguageIdentifier>(
-                   poolSize, minQueueSize,langIdFactory, null);
+                   poolSize, langIdFactory, null);
        }
     }
     /**

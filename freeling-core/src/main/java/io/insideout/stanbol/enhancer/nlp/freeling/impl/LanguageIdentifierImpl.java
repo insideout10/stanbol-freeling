@@ -29,7 +29,6 @@ import org.slf4j.LoggerFactory;
 import edu.upc.freeling.LangIdent;
 import edu.upc.freeling.PairDoubleString;
 import edu.upc.freeling.SWIGTYPE_p_std__setT_std__wstring_t;
-import edu.upc.freeling.Util;
 import edu.upc.freeling.VectorPairDoubleString;
 
 public class LanguageIdentifierImpl implements LanguageIdentifier {
