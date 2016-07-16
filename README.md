@@ -111,6 +111,6 @@ Please note that this project also provides a default configuration for Freeling
 License:
 -------
 
-All modules are provided under [Apache License Version 2.0](LICENSE). 
+All modules are provided under [GNU AFFERO GENERAL PUBLIC LICENSE](LICENSE), in order to comply with Freeling's [license requirements](https://github.com/insideout10/stanbol-freeling/issues).
 
-However note that they link to the [GPL](http://www.fsf.org/licenses/gpl.html) licensed Freeling. So please also have a look at the the Freeling [copying](http://devel.cpl.upc.edu/freeling/svn/trunk/COPYING) and [license](http://devel.cpl.upc.edu/freeling/svn/trunk/LICENSES) information. 
+Also take a look at Freeling's [copying](http://devel.cpl.upc.edu/freeling/svn/trunk/COPYING) and [license](http://devel.cpl.upc.edu/freeling/svn/trunk/LICENSES) information. 
