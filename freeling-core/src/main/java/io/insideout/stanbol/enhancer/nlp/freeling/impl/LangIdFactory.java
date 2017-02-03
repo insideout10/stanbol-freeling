@@ -19,9 +19,7 @@ package io.insideout.stanbol.enhancer.nlp.freeling.impl;
 import io.insideout.stanbol.enhancer.nlp.freeling.pool.ResourcePool.ResourceFactory;
 
 import java.util.Map;
-import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Future;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -61,10 +59,14 @@ public class LangIdFactory implements ResourceFactory<LanguageIdentifierImpl> {
     }
     
     @Override
-    public Future<LanguageIdentifierImpl> createResource(Map<String,Object> context) {
+    public LanguageIdentifierImpl createResource(Map<String,Object> context) {
         log.info("Request to create Language Identification Resource");
         final long request = System.currentTimeMillis();
-        return executorService.submit(new Callable<LanguageIdentifierImpl>() {
+        LanguageIdentifierImpl resource = new LanguageIdentifierImpl(configFile);
+        long created = System.currentTimeMillis();
+        log.info("  ... create in {}ms", created-request);
+        return resource;
+        /*return executorService.submit(new Callable<LanguageIdentifierImpl>() {
 
             @Override
             public LanguageIdentifierImpl call() throws Exception {
@@ -78,7 +80,7 @@ public class LangIdFactory implements ResourceFactory<LanguageIdentifierImpl> {
                 }
             }
             
-        });
+        });*/
     }
     
     @Override
